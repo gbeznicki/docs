@@ -62,26 +62,18 @@ In distributed tracing, each “trace” represents an end-to-end request throug
 Here’s a visual representation:
 
 TraceId: A1B2C3D4
-
-- Root Activity  
+- Root Activity (Represents the initial segment (e.g., an API request))
   - SpanId: 0001  
   - ParentSpanId: None  
-  - Represents the initial segment (e.g., an API request).
-
-  - Nested Activity 1  
-    - SpanId: 0002  
-    - ParentSpanId: 0001  
-    - Represents a task within the root activity (e.g., a database query).
-
-      - Further Nested Activity  
+   - Nested Activity 1 (Represents a task within the root activity (e.g., a database query))
+     - SpanId: 0002  
+     - ParentSpanId: 0001  
+      - Further Nested Activity (Represents a sub-task (e.g., an external service call))
         - SpanId: 0003  
         - ParentSpanId: 0002  
-        - Represents a sub-task (e.g., an external service call).
-
-  - Nested Activity 2  
-    - SpanId: 0004  
-    - ParentSpanId: 0001  
-    - Represents another task (e.g., cache retrieval).
+   - Nested Activity 2 (Represents another task (e.g., cache retrieval))
+     - SpanId: 0004  
+     - ParentSpanId: 0001  
 
 ## Start and stop Activities
 
