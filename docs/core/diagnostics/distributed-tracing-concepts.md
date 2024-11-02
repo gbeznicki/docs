@@ -57,6 +57,34 @@ Setting <xref:System.Diagnostics.Activity.ForceDefaultIdFormat?displayProperty=n
 to true overrides this behavior and creates all new Activities with the DefaultIdFormat, even
 when the parent uses a different ID format.
 
+Below you can find a visual representation:
+
+# Trace Structure (TraceId)
+
+- **TraceId: A1B2C3D4**  
+  - Represents the entire distributed request flow.
+
+## Root Activity (Span)
+
+- **Root Activity (SpanId: 0001)**
+  - `ParentSpanId`: None (root of the trace)
+  - Description: Initial segment of the trace (e.g., API request).
+
+  - **Nested Activity 1 (Span)**
+    - **SpanId: 0002**
+    - `ParentSpanId`: 0001
+    - Description: Represents a unit of work within the root activity (e.g., DB query).
+  
+      - **Further Nested Activity (Span)**
+        - **SpanId: 0003**
+        - `ParentSpanId`: 0002
+        - Description: Sub-task within Nested Activity 1 (e.g., external service call).
+  
+  - **Nested Activity 2 (Span)**
+    - **SpanId: 0004**
+    - `ParentSpanId`: 0001
+    - Description: Another unit of work in the root activity (e.g., cache retrieval).
+
 ## Start and stop Activities
 
 Each thread in a process may have a corresponding Activity object that tracks the work
